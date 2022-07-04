@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "es2016",
+      "dom",
+      "es5"
+    ],
+    "incremental": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "lib",
+    "rootDir": "src",
+    "strict": true,
+    "baseUrl": "src",
+    "types": [
+      "@types/jest",
+      "@types/node",
+      "@types/react-test-renderer"
+    ],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "./src",
+    ".eslintrc.js",
+    ".prettierrc.js",
+    "jest.config.js",
+    "webpack.config.js"
+  ],
+  "exclude": [
+    ".circleci",
+    "coverage",
+    "lib",
+    "node_modules"
+  ]
+}

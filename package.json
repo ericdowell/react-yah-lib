@@ -1,0 +1,98 @@
+{
+  "name": "ya-react-context-reducer",
+  "version": "2.0.2",
+  "license": "MIT",
+  "description": "Yet another React Context/Reducer library.",
+  "author": "Eric Dowell <github@ericdowell.com> (https://ericdowell.com)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericdowell/ya-react-context-reducer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ericdowell/ya-react-context-reducer/issues"
+  },
+  "homepage": "https://github.com/ericdowell/ya-react-context-reducer#readme",
+  "keywords": [
+    "json",
+    "api",
+    "simple",
+    "endpoint",
+    "resource",
+    "crud",
+    "react",
+    "axios"
+  ],
+  "main": "lib/ya-react-context-reducer.js",
+  "types": "lib/",
+  "scripts": {
+    "prebuild": "npm run clean && npm run lint -- --quiet",
+    "build": "npm run build:ts && npm run build:webpack",
+    "build:ts": "cross-env NODE_ENV=production tsc",
+    "build:webpack": "cross-env NODE_ENV=production webpack",
+    "clean": "rm -fr lib && echo '> removed lib folder'",
+    "prelint": "tsc --noEmit",
+    "lint": "eslint src --ext .ts --ext .tsx",
+    "lint:fix": "npm run lint -- --fix --quiet",
+    "prepublishOnly": "npm run build",
+    "pretest": "npm run lint",
+    "test": "cross-env TS_JEST_DISABLE_VER_CHECKER=true jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-merge": "npm i"
+    }
+  },
+  "lint-staged": {
+    "*.ts?(x)": "npm run lint:fix"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.14.0 || ^17.0.1 || ^18.0.0",
+    "react-dom": "^16.14.0 || ^17.0.1 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^13.1.9",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^14.17.1",
+    "@types/prop-types": "^15.7.3",
+    "@types/qs": "^6.9.6",
+    "@types/react": "^17.0.8",
+    "@types/react-dom": "^17.0.5",
+    "@types/react-test-renderer": "^17.0.1",
+    "@types/url-join": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-import-resolver-webpack": "^0.13.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "husky": "^4.3.8",
+    "jest": "^27.0.3",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-test-renderer": "^17.0.2",
+    "source-map-loader": "^3.0.0",
+    "ts-jest": "^27.0.1",
+    "ts-loader": "^9.2.2",
+    "typescript": "^4.3.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  }
+}
