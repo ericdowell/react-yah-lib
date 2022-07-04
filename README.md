@@ -3,6 +3,7 @@ A simple library to make using React Context + Reducer easer.
 
 ## Code Examples
 ```js
+import { createStateProvider } from 'ya-react-context-reducer'
 import { fetchCurrentUser } from '../api'
 
 export const actions = {
@@ -10,11 +11,13 @@ export const actions = {
     SET_USER: 'user',
 }
 
+const initialState = {
+    [actions.APP_INITIALIZE]: false,
+    [actions.SET_USER]: null,
+}
+
 export const [Context, StateProvider] = createStateProvider({
-    initialState: {
-        [actions.APP_INITIALIZE]: false,
-        [actions.SET_USER]: null,
-    },
+    initialState,
     actions,
     providerHelpers: (dispatch) => ({
         /**
@@ -53,4 +56,20 @@ export const [Context, StateProvider] = createStateProvider({
         },
     }),
 })
+```
+Then wrap your `App` with the `StateProvider`:
+```js
+
+```
+
+After that you may `useContext` within a component object destructure `state`/`dispatch`/`helpers`:
+```js
+import { Context } from '../../context'
+
+export function Example() {
+    const { state, helpers, dispatch } = useContext(Context)
+
+    helpers.setUser(null)
+    state.user
+}
 ```
