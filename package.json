@@ -1,6 +1,6 @@
 {
   "name": "react-yahl",
-  "version": "0.0.0",
+  "version": "0.0.1-beta.0",
   "license": "MIT",
   "description": "Yet another helper library for React.",
   "author": "Eric Dowell <github@ericdowell.com> (https://ericdowell.com)",
