@@ -15,21 +15,22 @@ export function createStateProvider<
   S,
   R extends Reducer<any, any>,
   A extends Record<string, string>,
+  H extends Record<string, (...args: any[]) => any>,
 >(options: {
   initialState: S
   actions: A
   actionCases?: StateActionCases<S>
-  providerHelpers?: (dispatch: Dispatch<ReducerAction<R>>) => StateProviderHelpers
+  providerHelpers?: (dispatch: Dispatch<ReducerAction<R>>) => StateProviderHelpers<H>
 }): [
   Context<{
     dispatch: Dispatch<ReducerAction<R>>
-    helpers: any
+    helpers: StateProviderHelpers<H>
     state: S
   }>,
   (props: StateProviderProps) => ReactElement<
     ProviderProps<{
       dispatch: Dispatch<ReducerAction<R>>
-      helpers: any
+      helpers: StateProviderHelpers<H>
       state: S
     }>
   >,
