@@ -21,17 +21,6 @@ export const [Context, StateProvider] = createStateProvider({
     actions,
     providerHelpers: (dispatch) => ({
         /**
-         * Helper function that reduces effort to call Reducer dispatch function.
-         *
-         * @param {string} action
-         * @param {*} payload
-         * @returns {void}
-         */
-        dispatchAction: function (action, payload) {
-            return dispatch({ type: action, [action]: payload })
-        },
-
-        /**
          * Initialize user globally.
          *
          * @returns {void}
@@ -67,16 +56,25 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(<StateProvider><App tab="home" /></StateProvider>);
 ```
 
-After that you may `useContext` within a component object destructure `state`/`dispatch`/`helpers`:
+After that you may `useContext` within a component object destructure `state`/`dispatch`/`helpers`.
+
+Note that `helpers` also contains a `action` function to help shorten the usage of the normal reducer `dispatch` function.
 ```jsx
+import { useEffect } from 'react'
 import { actions, Context } from '../../context'
 
 export function UserExample() {
     const { state, helpers, dispatch } = useContext(Context)
 
     helpers.setUser(null)
-    state.user
-    this.dispatchAction(actions.SET_USER, { id: 123, name: 'John Doe' })
+    helpers.action(actions.SET_USER, { id: 123, name: 'John Doe' })
+    helpers.action(actions.APP_INITIALIZE, true)
+
+    useEffect(() => {
+        window.console.log('app initialized', state.initialized)
+        window.console.log('user', state.user)
+    }, [state.initialized, state.user])
+    
     return <h1>{state.user.name}</>
 }
 ```

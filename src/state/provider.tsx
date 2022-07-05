@@ -61,7 +61,7 @@ export function createStateProvider<
       return options.actionCases[action.type](prevState, action)
     }, options.initialState)
     const helpers = {
-      dispatchAction: function (action: keyof A, payload: any): void {
+      action: function (action: keyof A, payload: any): void {
         dispatch({ type: options.actions[action], [action]: payload })
       },
       ...(typeof options?.providerHelpers === 'function' ? options.providerHelpers(dispatch) : {}),
