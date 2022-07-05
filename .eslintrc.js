@@ -1,5 +1,20 @@
+const parser = '@typescript-eslint/parser'
+const parserOptions = {
+  project: './tsconfig.json',
+  sourceType: 'module',
+  ecmaVersion: 2018,
+}
+const plugins = ['import', 'prettier', '@typescript-eslint']
+const lintExtends = [
+  'standard',
+  'eslint:recommended',
+  'plugin:@typescript-eslint/recommended',
+  'plugin:import/errors',
+  'plugin:import/warnings',
+  'plugin:prettier/recommended',
+]
 module.exports = {
-  parser: '@typescript-eslint/parser',
+  parser,
   reportUnusedDisableDirectives: true,
   env: {
     browser: true,
@@ -7,46 +22,17 @@ module.exports = {
     es6: true,
     node: true,
   },
-  plugins: ['import', 'jest', 'prettier', 'react', 'react-hooks', '@typescript-eslint'],
-  extends: [
-    'standard',
-    'eslint:recommended',
-    'plugin:jest/all',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
-  ],
-  parserOptions: {
-    project: './tsconfig.json',
-    sourceType: 'module',
-    ecmaVersion: 2018,
-  },
+  plugins,
+  extends: lintExtends,
+  parserOptions,
   settings: {
     'import/resolver': 'webpack',
-    react: {
-      version: 'detect',
-    },
   },
   rules: {
     'linebreak-style': ['error', 'unix'],
     'import/first': 'error',
     'import/no-unresolved': ['error'],
-    'jest/lowercase-name': [
-      'error',
-      {
-        ignore: ['describe'],
-      },
-    ],
-    'jest/prefer-inline-snapshots': ['warn'],
     'no-eval': 'error',
-    'no-use-before-define': 'off', // Using @typescript-eslint version instead.
-    // react
-    'react/display-name': 'error',
-    'react/function-component-definition': [2, { namedComponents: 'function-declaration' }],
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
     // typescript
     '@typescript-eslint/explicit-function-return-type': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -64,8 +50,24 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-use-before-define': 'error',
     '@typescript-eslint/promise-function-async': ['error'],
     '@typescript-eslint/semi': ['error', 'never'],
   },
+  overrides: [
+    {
+      files: ['**/?(*.)+(spec|test).[tj]s?(x)'],
+      parser,
+      plugins: [...plugins, 'jest'],
+      parserOptions,
+      extends: ['plugin:jest/all', ...lintExtends],
+      rules: {
+        'jest/prefer-lowercase-title': [
+          'error',
+          {
+            ignore: ['describe'],
+          },
+        ],
+      },
+    },
+  ],
 }
