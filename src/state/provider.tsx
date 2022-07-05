@@ -8,7 +8,7 @@ import React, {
   ReducerAction,
   useReducer,
 } from 'react'
-import { StateAction, StateActionCases, StateProviderHelpers, StateProviderProps } from './types'
+import { StateAction, StateActionCases, StateProviderProps } from './types'
 import { applyReducerState } from './helpers'
 
 export function createStateProvider<
@@ -20,17 +20,19 @@ export function createStateProvider<
   initialState: S
   actions: A
   actionCases?: StateActionCases<S>
-  providerHelpers?: (dispatch: Dispatch<ReducerAction<R>>) => StateProviderHelpers<H>
+  providerHelpers?: (
+    dispatch: Dispatch<ReducerAction<R>>,
+  ) => H & { action: (action: string, payload: any) => void }
 }): [
   Context<{
     dispatch: Dispatch<ReducerAction<R>>
-    helpers: StateProviderHelpers<H>
+    helpers: H & { action: (action: string, payload: any) => void }
     state: S
   }>,
   (props: StateProviderProps) => ReactElement<
     ProviderProps<{
       dispatch: Dispatch<ReducerAction<R>>
-      helpers: StateProviderHelpers<H>
+      helpers: H & { action: (action: string, payload: any) => void }
       state: S
     }>
   >,
