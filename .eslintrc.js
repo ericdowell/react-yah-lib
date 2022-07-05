@@ -61,6 +61,7 @@ module.exports = {
       parserOptions,
       extends: ['plugin:jest/all', ...lintExtends],
       rules: {
+        '@typescript-eslint/explicit-function-return-type': 'off',
         'jest/prefer-lowercase-title': [
           'error',
           {
