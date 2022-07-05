@@ -1,5 +1,9 @@
 # Yet Another Helper Library for React
-A simple library to make using React Context + Reducer easer.
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/ericdowell/react-yahl/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/ericdowell/react-yahl/tree/main)
+[![npm version](https://img.shields.io/npm/v/react-yahl.svg?style=flat-square)](https://www.npmjs.com/package/react-yahl)
+[![npm downloads](https://img.shields.io/npm/dm/react-yahl.svg?style=flat-square)](http://npm-stat.com/charts.html?package=react-yahl)
+
+A simple library to make using React things, e.g. making Context + Reducer setup, state and dispatching easier.
 
 ## Code Examples
 ```js
