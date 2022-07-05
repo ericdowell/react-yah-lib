@@ -58,18 +58,25 @@ export const [Context, StateProvider] = createStateProvider({
 })
 ```
 Then wrap your `App` with the `StateProvider`:
-```js
+```jsx
+import { StateProvider } from './context'
+import { createRoot } from 'react-dom/client';
 
+const container = document.getElementById('app');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<StateProvider><App tab="home" /></StateProvider>);
 ```
 
 After that you may `useContext` within a component object destructure `state`/`dispatch`/`helpers`:
-```js
-import { Context } from '../../context'
+```jsx
+import { actions, Context } from '../../context'
 
-export function Example() {
+export function UserExample() {
     const { state, helpers, dispatch } = useContext(Context)
 
     helpers.setUser(null)
     state.user
+    this.dispatchAction(actions.SET_USER, { id: 123, name: 'John Doe' })
+    return <h1>{state.user.name}</>
 }
 ```
