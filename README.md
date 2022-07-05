@@ -1,4 +1,4 @@
-# React Yet Another Helper Lib
+# React Yet Another Helper Library
 A simple library to make using React Context + Reducer easer.
 
 ## Code Examples
