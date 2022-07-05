@@ -30,12 +30,6 @@ module.exports = {
     ],
   },
   externals: {
-    'prop-types': {
-      commonjs: 'prop-types',
-      commonjs2: 'prop-types',
-      amd: 'prop-types',
-      root: 'prop-types',
-    },
     react: {
       commonjs: 'react',
       commonjs2: 'react',
