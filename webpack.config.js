@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   mode: process.env.NODE_ENV || 'production',
   entry: {
-    'ya-react-context-reducer': path.resolve(__dirname, 'src/index.ts'),
+    'react-yahl': path.resolve(__dirname, 'src/index.ts'),
   },
   devtool: 'source-map',
   output: {
