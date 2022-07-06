@@ -81,6 +81,6 @@ export function UserExample() {
         window.console.log('user', state.user)
     }, [state.initialized, state.user])
     
-    return <h1>{state.user.name}</>
+    return <h1>{state.user?.name}</>
 }
 ```
