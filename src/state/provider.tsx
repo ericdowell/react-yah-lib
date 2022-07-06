@@ -20,9 +20,7 @@ export function createStateProvider<
   initialState: S
   actions: A
   actionCases?: StateActionCases<S>
-  providerHelpers?: (
-    dispatch: Dispatch<ReducerAction<R>>,
-  ) => H & { action: (action: string, payload: any) => void }
+  providerHelpers?: (dispatch: Dispatch<ReducerAction<R>>) => H
 }): [
   Context<{
     dispatch: Dispatch<ReducerAction<R>>
@@ -37,9 +35,10 @@ export function createStateProvider<
     }>
   >,
 ] {
+  type Helpers = H & { action: (action: string, payload: any) => void }
   type LocalProviderProps = {
     dispatch: Dispatch<ReducerAction<R>>
-    helpers: any
+    helpers: Helpers
     state: S
   }
   if (!options.actions || typeof options.actions !== 'object' || Object.keys(options.actions).length === 0) {
@@ -52,7 +51,7 @@ export function createStateProvider<
     dispatch: (value: any): void => undefined, // StateProvider will have correct Reducer dispatch function
     helpers: {}, // StateProvider will have correct helper functions
     state: options.initialState, // dispatch/state will be maintained by Reducer provided in StateProvider going forward
-  })
+  } as LocalProviderProps)
   function StateProvider(props: StateProviderProps): ReactElement<ProviderProps<LocalProviderProps>> {
     const [state, dispatch] = useReducer((prevState: S, action: StateAction): any => {
       if (!availableActionTypes.includes(action.type)) {
@@ -63,11 +62,11 @@ export function createStateProvider<
       }
       return options.actionCases[action.type](prevState, action)
     }, options.initialState)
-    const helpers = {
+    const helpers: Helpers = {
       action: function (action: string, payload: any): void {
         dispatch({ type: action, [action]: payload })
       },
-      ...(typeof options?.providerHelpers === 'function' ? options.providerHelpers(dispatch) : {}),
+      ...((typeof options?.providerHelpers === 'function' ? options.providerHelpers(dispatch) : {}) as H),
     }
     return (
       <LocalContext.Provider
