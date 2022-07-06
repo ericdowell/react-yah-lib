@@ -7,7 +7,7 @@ A simple library to make using React things easier, e.g. making Context + Reduce
 
 ## Code Examples
 ```js
-import { createStateProvider } from 'ya-react-context-reducer'
+import { createStateProvider } from 'react-yahl'
 import { fetchCurrentUser } from '../api'
 
 export const actions = {
