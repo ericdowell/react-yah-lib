@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/react-yahl.svg?style=flat-square)](https://www.npmjs.com/package/react-yahl)
 [![npm downloads](https://img.shields.io/npm/dm/react-yahl.svg?style=flat-square)](http://npm-stat.com/charts.html?package=react-yahl)
 
-A simple library to make using React things, e.g. making Context + Reducer setup, state and dispatching easier.
+A simple library to make using React things easier, e.g. making Context + Reducer setup, state and dispatching.
 
 ## Code Examples
 ```js
@@ -34,7 +34,7 @@ export const [Context, StateProvider] = createStateProvider({
                 if (response.status === 200 && response.data.user) {
                     this.setUser(response.data.user)
                 }
-                this.dispatchAction(actions.APP_INITIALIZE, true)
+                this.action(actions.APP_INITIALIZE, true)
             })
         },
 
@@ -45,7 +45,7 @@ export const [Context, StateProvider] = createStateProvider({
          * @returns {void}
          */
         setUser: function (user) {
-            return this.dispatchAction(actions.SET_USER, user)
+            this.action(actions.SET_USER, user)
         },
     }),
 })
@@ -68,8 +68,10 @@ import { useEffect } from 'react'
 import { actions, Context } from '../../context'
 
 export function UserExample() {
+    // The different options to (object) destructure from the context.
     const { state, helpers, dispatch } = useContext(Context)
 
+    // Just showing the different things someone can do.
     helpers.setUser(null)
     helpers.action(actions.SET_USER, { id: 123, name: 'John Doe' })
     helpers.action(actions.APP_INITIALIZE, true)
