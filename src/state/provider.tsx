@@ -36,7 +36,7 @@ export function createStateProvider<
   >,
 ] {
   type Helpers = H & { action: (action: string, payload: any) => void }
-  type LocalProviderProps = {
+  type ReducerContextProps = {
     dispatch: Dispatch<ReducerAction<R>>
     helpers: Helpers
     state: S
@@ -46,13 +46,13 @@ export function createStateProvider<
   }
   const availableActionTypes = Object.values(options.actions)
   const stringifyActions = JSON.stringify(availableActionTypes)
-  const LocalContext = createContext<LocalProviderProps>({
+  const LocalContext = createContext<ReducerContextProps>({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     dispatch: (value: any): void => undefined, // StateProvider will have correct Reducer dispatch function
     helpers: {}, // StateProvider will have correct helper functions
     state: options.initialState, // dispatch/state will be maintained by Reducer provided in StateProvider going forward
-  } as LocalProviderProps)
-  function StateProvider(props: StateProviderProps): ReactElement<ProviderProps<LocalProviderProps>> {
+  } as ReducerContextProps)
+  function StateProvider(props: StateProviderProps): ReactElement<ProviderProps<ReducerContextProps>> {
     const [state, dispatch] = useReducer((prevState: S, action: StateAction): any => {
       if (!availableActionTypes.includes(action.type)) {
         throw new Error(`Unknown action: "${action.type}", known actions: ${stringifyActions}`)
