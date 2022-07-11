@@ -7,7 +7,7 @@ A simple library to make using React things easier, e.g. making Context + Reduce
 
 ## What does this library solve?
 
-Removing the `swtich` statement often takes used with React Reducers and remove the obvious repeating pattern.
+Removing the `swtich` statement often times used with React Reducers and remove the obvious repeating pattern.
 
 Take for example this reducer/context:
 
